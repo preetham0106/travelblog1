@@ -19,16 +19,11 @@ httpRequest.onload=function()
     data=JSON.parse(this.responseText)
     console.log(data)
     const arr=data.data
-//     for (i=0;i<localStorage.length;i++)
-//  { 
-//     x = localStorage.key(i);
-//     lastname=localStorage.getItem(x);
-//     if(lastname==null)
-//     continue
-//     console.log(lastname)
-//     const obj1=JSON.parse(lastname);
-//     document.getElementById("tbody").innerHTML+="<tr> <td>"+obj1.name+"</td><td>"+obj1.mail+"</td><td>"+obj1.username+"</td><td>"+obj1.address+"</td></tr>"
-// }
+    const data2 = JSON.parse(window.localStorage.getItem('users'))
+    for(user of data2)
+    {
+  document.getElementById("tbody").innerHTML+="<tr> <td>"+user.name+"</td><td>"+user.mail+"</td><td>"+user.username+"</td><td>"+user.address+"</td></tr>"
+ }
 for(i of arr)
 {
     document.getElementById("tbody").innerHTML+="<tr> <td>"+i.first_name+"</td><td>"+i.email+"</td><td>"+i.last_name+"</td></tr>"

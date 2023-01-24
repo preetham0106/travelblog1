@@ -1,11 +1,34 @@
-console.log("hi")
+var users=localStorage.getItem('users');
+if (users === null) {
+  users = [
+    {
+      name:"admin",
+      mail: "admin@gmail.com",
+      password: "admin",
+      username:"admin",
+      address:"lbnagar",
+      islogged:false,
+    },
+  ];
+  localStorage.setItem("users", JSON.stringify(users));
+}
+else
+{
+  users=JSON.parse(users);
+}
 
 var exists=(email)=>{
     console.log(email)
-        if(localStorage.getItem(email))
-        return true;
-        return false;
-       }
+    const arr=JSON.parse(localStorage.getItem("users"))
+    for(users of arr)
+    {
+        if(users.mail===email)
+        {
+            return true;
+        }
+    }
+    return  false;
+}
     const signup=document.getElementById("signup")
     // signup.addEventListener("click", ()=>{
     //     document.getElementsByClassName('signupFrm')[0].style.display=''
@@ -25,7 +48,7 @@ var exists=(email)=>{
         console.log(cnfpassword)
         const address=document.getElementById("address").value
         console.log(address)
-        if(email===null||name==null||username==null||password==null||cnfpassword==null||address==null){
+        if(email.length==0||name==null||username.length==0||password.length==0||cnfpassword.length==0||address.length==0){
             if(email.size()==0){
                 document.getElementById("email").value="mandetory"
     
@@ -61,13 +84,16 @@ var exists=(email)=>{
         document.getElementById("cnfpassword").placeholder="passwords not matched"
        }
    else if(exists(email)){
-        document.getElementById("email").value="already exist"
+        alert("email alredy exist")
       }
     
        else{
+        users=JSON.parse(localStorage.getItem('users', JSON.stringify(users)));
          console.log("enter into else loop")
          const new_data={name:name,password:password,mail:email,username:username,address:address,islogged:false}
-          localStorage.setItem(email,JSON.stringify(new_data))
+         users.push(new_data)
+          localStorage.setItem("users",JSON.stringify(users))
+          window.open("login.html")
           console.log(new_data)
           //console.log(persons)
     
@@ -79,8 +105,7 @@ var exists=(email)=>{
        }
     
         })
-    
-        
+
     
     
   

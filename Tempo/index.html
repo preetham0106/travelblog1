@@ -66,7 +66,7 @@
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
           <li><a class="nav-link scrollto" href="login.html" id="options">login/signup</a></li>
           <li><button class="btn btn-primary" id="logout" style="display:none">Logout</button></li>
-          <li><a class="nav-link scrollto" href="loginadmin.html" id="options">Admin</a></li>
+          <li><a class="nav-link scrollto" href="/bootstrap-simple-admin-template-main/loginadmin.html" id="options">Admin</a></li>
         
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -581,20 +581,20 @@
             <form  name="form1" onsubmit="required()" class="php-email-form">
               <div class="row">
                 <div class="col-md-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required id="name">
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required id="email">
                 </div>
               </div>
               <div class="form-group mt-3">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required id="subject">
               </div>
               <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                <textarea class="form-control" name="message" rows="5" placeholder="Message" required id="message"></textarea>
               </div>
               <br>
-              <div class="text-center"><button type="submit">Send Message</button></div>
+              <div class="text-center"><button type="submit" id="submit">Send Message</button></div>
             </form>
             <script>
             function required()
@@ -694,6 +694,8 @@
   <!-- Template Main JS File -->
   <script src="assets/js/index.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/queries.js"></script>
+  
 
 </body>
 
