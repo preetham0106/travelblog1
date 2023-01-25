@@ -17,6 +17,7 @@ console.log("hi")
     
          console.log("enter into else loop")
          const queries=JSON.parse(localStorage.getItem("queries"))
+         
          const new_data={name:name,email:email,subject:subject,message:message}
          queries.push(new_data)
           localStorage.setItem("queries",JSON.stringify(queries))
