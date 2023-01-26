@@ -83,7 +83,7 @@ for(persons of obj)
             document.getElementById("profile").style.display='none'
             document.getElementById("logout").style.display='none'
             document.getElementById('options').style.display=''
-            document.getElementById("admin").style.display='none'
+            document.getElementById("admin").style.display=''
             document.getElementById('greeting').innerHTML='Welcome to <strong>Travello</strong>'
 
 

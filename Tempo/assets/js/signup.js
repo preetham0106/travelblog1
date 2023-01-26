@@ -1,21 +1,21 @@
 var users=localStorage.getItem('users');
-if (users === null) {
-  users = [
-    {
-      name:"admin",
-      mail: "admin@gmail.com",
-      password: "admin",
-      username:"admin",
-      address:"lbnagar",
-      islogged:false,
-    },
-  ];
-  localStorage.setItem("users", JSON.stringify(users));
-}
-else
-{
-  users=JSON.parse(users);
-}
+// if (users === null) {
+//   users = [
+//     {
+//       name:"admin",
+//       mail: "admin@gmail.com",
+//       password: "admin",
+//       username:"admin",
+//       address:"lbnagar",
+//       islogged:false,
+//     },
+//   ];
+//   localStorage.setItem("users", JSON.stringify(users));
+// }
+// else
+// {
+//   users=JSON.parse(users);
+// }
 
 var exists=(email)=>{
     console.log(email)
