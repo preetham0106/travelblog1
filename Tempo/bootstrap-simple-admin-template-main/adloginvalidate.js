@@ -1,14 +1,10 @@
-const persons=[]
 
-const submit=document.getElementById('submit')
-submit.addEventListener("click",()=>{
-    const mailId=document.getElementById("typeEmailX").value
+$(document).ready(function(){
+    $("#submit").click(function(){
+    const mailId=$("#typeEmailX").val()
 
 
-const passwd=document.getElementById("typePasswordX").value
-console.log(mailId)
-console.log(passwd)
-console.log("button clicked")
+const passwd=$("#typePasswordX").val()
 
 if("admin@gmail.com"===mailId){
     if("admin"===passwd){
@@ -19,3 +15,5 @@ if("admin@gmail.com"===mailId){
         }
     })
         
+});
+ 

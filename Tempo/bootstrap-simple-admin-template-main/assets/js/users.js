@@ -9,24 +9,11 @@
 </td>
 </tr> */
 
+$.get("http://127.0.0.1:3000/users",function(data,textStatus,jqXHR){
+      data1=JSON.parse(data)
+      for(user of data1)
+      {
+        $("#tbody").append("<tr> <td>"+user.name+"</td><td>"+user.mail+"</td><td>"+user.username+"</td><td>"+user.address+"</td></tr>")
+      }
 
-const httpRequest=new XMLHttpRequest()
-httpRequest.open('GET','https://reqres.in/api/users?page=2')
-httpRequest.send()
-httpRequest.onload=function()
-
-{
-    data=JSON.parse(this.responseText)
-    console.log(data)
-    const arr=data.data
-    const data2 = JSON.parse(window.localStorage.getItem('users'))
-    for(user of data2)
-    {
-  document.getElementById("tbody").innerHTML+="<tr> <td>"+user.name+"</td><td>"+user.mail+"</td><td>"+user.username+"</td><td>"+user.address+"</td></tr>"
- }
-for(i of arr)
-{
-    document.getElementById("tbody").innerHTML+="<tr> <td>"+i.first_name+"</td><td>"+i.email+"</td><td>"+i.last_name+"</td></tr>"
-}
-}
-
+});

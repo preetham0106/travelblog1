@@ -21,35 +21,54 @@
 // arr.push({name:"Arunachal Pradesh",src:"assets/img/portfolio/portfolio-5.jpg",description:"Tawang is a town and administrative headquarter of Tawang district in the Indian state of Arunachal Pradesh. The town was once the capital of the Tawang Tract, which is now divided into the Tawang district and the West Kameng district. Tawang continues as the headquarters of the former.",isopen:false})
 // arr.push({name:"Srinagar",src:"assets/img/portfolio/portfolio-6.jpg",description:" Dal is a lake in Srinagar, the summer capital of Jammu and Kashmir. It is an urban lake, the second largest lake in Jammu and Kashmir, and the most visited place in Srinagar by tourists and locals.",isopen:false})
 // localStorage.setItem("places",JSON.stringify(arr))
+// console.log("hi")
+// $(document).ready(function(){
+//         const places=JSON.parse(localStorage.getItem("places"))
+// //console.log(places)
+//         for(place of places){
+//              $("#places").append("<div class='col-lg-4 col-md-6 portfolio-item filter-app'> <img src="+place.src+" class='img-fluid' alt=''><div class='portfolio-info'><h4>"+place.name+"</h4><a href="+place.src+" data-gallery='portfolioGallery' class='portfolio-lightbox preview-link' title='"+place.name+"'><i class='bx bx-plus'></i></a><button href='portfolio-details.html' class='btn btn-primary' title='More Details' id='"+place.name+"'>know more</i></button></div></div>")
+//         }
+// });
 
+    // jQuery methods go here...
+    $(document).ready(function(){
 
-const container=document.getElementById("places")
-
-const places=JSON.parse(localStorage.getItem("places"))
+    const name=window.location.hash.slice(1)
+    //httpRequest=new XMLHttpRequest();
+    //httpRequest.open('GET','http://127.0.0.1:3000/places')
+    $.get('http://127.0.0.1:3000/places',function(data, textStatus, jqXHR)
+    {
+        arr=JSON.parse(data)
+        console.log(data)
+        //container.innerHTML=""
+        //$("#places").html("")
+        for(place of arr){
+            $("#places").append("<div class='col-lg-4 col-md-6 portfolio-item filter-app'> <img src="+place.src+" class='img-fluid' alt=''><div class='portfolio-info'><h4>"+place.name+"</h4><a href="+place.src+" data-gallery='portfolioGallery' class='portfolio-lightbox preview-link' title='"+place.name+"'><i class='bx bx-plus'></i></a><button href='portfolio-details.html' class='btn btn-primary' title='More Details' id='"+place.name+"'>know more</i></button></div></div>")
+        }
+        arr1=$("button")
+         console.log(arr1)
+         let n=arr1.length
+         for(let i=1;i<n-1;i++){
+             $(arr1[i]).click(function(){
+                window.location="portfolio-details.html#"+arr[i-1].name})}})
 //console.log(places)
-for(place of places){
-    container.innerHTML+="<div class='col-lg-4 col-md-6 portfolio-item filter-app'> <img src="+place.src+" class='img-fluid' alt=''><div class='portfolio-info'><h4>"+place.name+"</h4><a href="+place.src+" data-gallery='portfolioGallery' class='portfolio-lightbox preview-link' title='"+place.name+"'><i class='bx bx-plus'></i></a><button href='portfolio-details.html' class='btn btn-primary' title='More Details' id='"+place.name+"'>know more</i></button></div></div>"
+// for(place of places){
+//     container.innerHTML+="<div class='col-lg-4 col-md-6 portfolio-item filter-app'> <img src="+place.src+" class='img-fluid' alt=''><div class='portfolio-info'><h4>"+place.name+"</h4><a href="+place.src+" data-gallery='portfolioGallery' class='portfolio-lightbox preview-link' title='"+place.name+"'><i class='bx bx-plus'></i></a><button href='portfolio-details.html' class='btn btn-primary' title='More Details' id='"+place.name+"'>know more</i></button></div></div>"
     
-    
- }
-
-arr=document.querySelectorAll('button')
-let n=arr.length
-for(let i=1;i<n;i++){
-    //console.log("button clicked")
-    arr[i].addEventListener("click",()=>{
-        console.log(places[i-1])
-        window.location="portfolio-details.html#"+places[i-1].name
-    })
-    
-}
+// }
+//  arr1=$("button")
+//  console.log(arr1)
+//  let n=arr1.length
+//  for(let i=1;i<n-1;i++){
+//     $(arr1[i]).click(function(){
+//         window.location="portfolio-details.html#"+places[i-1].name
+//     })
+// }
 
 //localStorage.setItem("queries",JSON.stringify([]))
-
-console.log("index file")
-let obj=JSON.parse(localStorage.getItem("users"))
-console.log(obj)
-for(persons of obj)
+$.get("http://127.0.0.1:3000/users",function(data,textStatus,jqXHR){
+      const data1=JSON.parse(data)
+for(persons of data1)
 {  
     console.log("meghana")
     console.log(persons.islogged)
@@ -57,19 +76,18 @@ for(persons of obj)
     {
         console.log("hello")
         console.log(persons.name)
-        document.getElementById("greeting").innerHTML="Welcome"+" "+persons.name
-        document.getElementById("options").style.display='none'
-        document.getElementById("logout").style.display=''
-        document.getElementById("profile").style.display=''
-        document.getElementById("admin").style.display='none'
-        const logout=document.getElementById("logout")
-    logout.addEventListener("click",()=>{
-            logout.style.display='none'
+        $("#greeting").html("Welcome"+" "+persons.name)
+        $("#options").css('display','none');
+        $("#logout").css('display','');
+        $("#profile").css('display','');
+       $("#admin").css('display','none');
+        $("#logout").click(function(){
+            $("#logout").css('display','none');
             console.log("hi")
             const new_data={name:persons.name,password:persons.password,mail:persons.mail,username:persons.username,address:persons.address,islogged:false}
-            const obj1=JSON.parse(localStorage.getItem("users"))
+            
             const obj2=[]
-            for(person of obj1)
+            for(person of data1)
             {
                 if(new_data.mail==person.mail){
                     continue
@@ -79,12 +97,22 @@ for(persons of obj)
                 }
             }
             obj2.push(new_data)
-            localStorage.setItem("users",JSON.stringify(obj2))
-            document.getElementById("profile").style.display='none'
-            document.getElementById("logout").style.display='none'
-            document.getElementById('options').style.display=''
-            document.getElementById("admin").style.display=''
-            document.getElementById('greeting').innerHTML='Welcome to <strong>Travello</strong>'
+            $.ajaxSetup({
+                headers: {
+                'Content-Type': 'application/json',
+             'Accept': 'application/json'
+                    }
+                });
+              body=JSON.stringify(obj2)
+            $.post("http://localhost:3000/users1",body,function(xhr,status,responseText){
+                console.log(resposeText)
+        
+            })
+            $("#profile").css('display','none');
+            $("#logout").css('display','none');
+            $('#options').css('display','');
+            $("#admin").css('display','');
+            $('#greeting').html('Welcome to <strong>Travello</strong>')
 
 
        })
@@ -92,3 +120,6 @@ for(persons of obj)
     }
     
 }
+
+})
+    });

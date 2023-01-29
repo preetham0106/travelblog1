@@ -1,9 +1,9 @@
 function isGood(password) {
-    var password_strength = document.getElementById("password-text");
+    var password_strength = $("#password-text");
 
     //TextBox left blank.
     if (password.length == 0) {
-      password_strength.innerHTML = "";
+      password_strength.html("");
       return;
     }
 
@@ -39,6 +39,6 @@ function isGood(password) {
         break;
 
     }
-    password_strength.innerHTML = strength;
+    password_strength.html(strength);
 
   }

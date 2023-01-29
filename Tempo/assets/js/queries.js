@@ -1,20 +1,19 @@
-console.log("hi")
 
 
-    const signup=document.getElementById("submit")
     // signup.addEventListener("click", ()=>{
     //     document.getElementsByClassName('signupFrm')[0].style.display=''
        // const signup=document.getElementById('signup')
-       console.log(signup)
-        signup.addEventListener("click",()=>{
-            console.log("buttonclicked")
-            const name=document.getElementById("name").value
+       $(document).ready(function(){
+        $("#submit").click(function(){
+
+        console.log("buttonclicked")
+            const name=$("#name").val()
         console.log(name)
-        const email=document.getElementById("email").value
+        const email=$("#email").val()
         console.log(email)
-        const subject=document.getElementById("subject").value
+        const subject=$("#subject").val()
         console.log(subject)
-        const message=document.getElementById("message").value
+        const message=$("#message").val()
         console.log(message)
 
         data={
@@ -24,20 +23,31 @@ console.log("hi")
           message:message,
       
       }
-      obj1=JSON.stringify(data)
-      var xhttp=new XMLHttpRequest()
-      xhttp.open("POST","http://localhost:3000/queries",true)
-      xhttp.setRequestHeader("content-type","application/json")
-      xhttp.onreadystatechange=function(){
+    //   obj1=JSON.stringify(data)
+    //   var xhttp=new XMLHttpRequest()
+    //   xhttp.open("POST","http://localhost:3000/queries",true)
+    //   xhttp.setRequestHeader("content-type","application/json")
+    //   xhttp.onreadystatechange=function(){
   
-          if(this.readyState==4)
-          {
-              var response=this.responseText
-              console.log(response)
-          }
-      }
-      xhttp.send(obj1)
-      
+    //       if(this.readyState==4)
+    //       {
+    //           var response=this.responseText
+    //           console.log(response)
+    //       }
+    //   }
+    //   xhttp.send(obj1)
+
+    $.ajaxSetup({
+        headers: {
+        'Content-Type': 'application/json',
+     'Accept': 'application/json'
+            }
+        });
+      body=JSON.stringify(data)
+    $.post("http://localhost:3000/queries",body,function(xhr,status,responseText){
+        console.log(resposeText)
+
+    })
     
         //  console.log("enter into else loop")
         //  const queries=JSON.parse(localStorage.getItem("queries"))
@@ -83,4 +93,6 @@ console.log("hi")
               
           // })
     
+        });
     
+          

@@ -7,43 +7,43 @@
 // arr.push({name:"Arunachal Pradesh",src:"assets/img/portfolio/portfolio-5.jpg",decsription:"Tawang is a town and administrative headquarter of Tawang district in the Indian state of Arunachal Pradesh. The town was once the capital of the Tawang Tract, which is now divided into the Tawang district and the West Kameng district. Tawang continues as the headquarters of the former.",isopen:false})
 // arr.push({name:"Srinagar",src:"assets/img/portfolio/portfolio-6.jpg",description:" Dal is a lake in Srinagar, the summer capital of Jammu and Kashmir. It is an urban lake, the second largest lake in Jammu and Kashmir, and the most visited place in Srinagar by tourists and locals.",isopen:false})
 // localStorage.setItem("places",JSON.stringify(arr))
-console.log("js file")
-// const add=document.getElementById("add")
-// add.addEventListener("click",()=>{
-//     console.log("clicked")
-    //document.getElementById('places').style.display='none'
-    // document.getElementById('form').style.display=''
-    // document.getElementById('add').style.display='none'
-    const add_place=document.getElementById("submit")
-    add_place.addEventListener("click",()=>{
+
+$(document).ready(function(){
+  console.log("hello")
+  $("#submit").click(function(){
+        console.log("hi")
+        
       console.log("clicked 2nd time")
-      const name=document.getElementById("name").value
-      const link=document.getElementById("link").value
-      const description=document.getElementById("description").value
-      const arr1=JSON.parse(localStorage.getItem("places"))
+      const name=$("#name").val()
+      const link=$("#link").val()
       
-      arr1.push({
+      const description=$("#description").val()
+       data={
         name:name,
         src:link,
-        description:description
-      })
-      localStorage.setItem("places",JSON.stringify(arr1))
-      console.log("data saved bro")
-
-        const container=document.getElementById("places")
-        
-        const places=JSON.parse(localStorage.getItem("places"))
-console.log(places)
-// for(place of places){
-//     container.innerHTML+="<div class='col-lg-4 col-md-6 portfolio-item filter-app'> <img src="+place.src+" class='img-fluid' alt=''><div class='portfolio-info'><h4>"+place.name+"</h4><a href="+place.src+" data-gallery='portfolioGallery' class='portfolio-lightbox preview-link' title='"+place.name+"'><i class='bx bx-plus'></i></a><a href='portfolio-details.html' class='details-link' title='More Details'><i class='bx bx-link'></i></a></div></div>"
-// }
+        description:description,
+        isopen:false
+      }
+      console.log(data)
+      //const httpRequest=new XMLHttpRequest()
+      $.ajaxSetup({
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    });
+    body=JSON.stringify(data)
+    $.post('http://127.0.0.1:3000/places',body,function(xhr,status,responseText){
+       alert(responseText)
 
     })
+    })
+  });
 
 
-const container=document.getElementById("places")
+//const container=document.getElementById("places")
 //container.innerHTML="";
-const places=JSON.parse(localStorage.getItem("places"))
+//const places=JSON.parse(localStorage.getItem("places"))
 //console.log(places)
 // for(place of places){
 //     container.innerHTML+="<div class='col-lg-4 col-md-6 portfolio-item filter-app'> <img src="+place.src+" class='img-fluid' alt=''><div class='portfolio-info'><h4>"+place.name+"</h4><a href="+place.src+" data-gallery='portfolioGallery' class='portfolio-lightbox preview-link' title='"+place.name+"'><i class='bx bx-plus'></i></a><a href='portfolio-details.html' class='details-link' title='More Details'><i class='bx bx-link'></i></a></div></div>"

@@ -1,32 +1,34 @@
-const users=JSON.parse(localStorage.getItem("users"))
-console.log(users)
-for (user of users)
-{
-    console.log(user)
-    if(user.islogged){
-        document.getElementById("name").value=user.name
-        document.getElementById("username").value=user.username
-        document.getElementById("address").value=user.address
-        document.getElementById("mail").value=user.mail
-        document.getElementById("heading").innerHTML=user.name
-        const edit=document.getElementById("edit")
-        edit.addEventListener("click",()=>{
+$(document).ready(function(){
+    $.get("http://127.0.0.1:3000/users",function(data,textStatus,jqXHR){
+      const data1=JSON.parse(data)
+  for (user of data1)
+  {
+      console.log(user)
+      if(user.islogged){
+          $("#name").val(user.name)
+          $("#username").val(user.username)
+          $("#address").val(user.address)
+          $("#mail").val(user.mail)
+         $("#heading").html(user.name)
+    $("#edit").click(function(){
             console.log("hi")
-                user.name=document.getElementById("name").value
-                user.username=document.getElementById("username").value
-                user.address=document.getElementById("address").value
-                user.mail=document.getElementById("mail").value
-
+                user.name=$("#name").val()
+                user.username=$("#username").val()
+                user.address=$("#address").val()
+                user.mail=$("#mail").val()
         localStorage.setItem("users",JSON.stringify(user))
-                document.getElementById("name").value=user.name
-                document.getElementById("username").value=user.username
-                document.getElementById("address").value=user.address
-                document.getElementById("mail").value=user.mail
-                document.getElementById("heading").innerHTML=user.name
+                $("#name").val(user.name)
+                $("#username").val(user.username)
+               $("address").val(user.address)
+                $("mail").val(user.mail)
+                $("heading").html(user.name)
         })
             }
         }
 
+    });
+        
+})
 
 
 // for( persons in localStorage){
