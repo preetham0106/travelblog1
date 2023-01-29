@@ -1,10 +1,13 @@
+//const { json } = require("express");
+
 $(document).ready(function(){
     $.get("http://127.0.0.1:3000/users",function(data,textStatus,jqXHR){
       const data1=JSON.parse(data)
   for (user of data1)
   {
-      console.log(user)
+      
       if(user.islogged){
+        console.log(user)
           $("#name").val(user.name)
           $("#username").val(user.username)
           $("#address").val(user.address)
@@ -12,16 +15,36 @@ $(document).ready(function(){
          $("#heading").html(user.name)
     $("#edit").click(function(){
             console.log("hi")
-                user.name=$("#name").val()
-                user.username=$("#username").val()
-                user.address=$("#address").val()
-                user.mail=$("#mail").val()
-        localStorage.setItem("users",JSON.stringify(user))
-                $("#name").val(user.name)
-                $("#username").val(user.username)
-               $("address").val(user.address)
-                $("mail").val(user.mail)
-                $("heading").html(user.name)
+             user1={
+                name:$("#name").val(),
+                username:$("#username").val(),
+                address:$("#address").val(),
+                mail:$("#mail").val(),
+                islogged:true
+            }
+                // user.name=$("#name").val()
+                // user.username=$("#username").val()
+                // user.address=$("#address").val()
+                // user.mail=$("#mail").val()
+       // localStorage.setItem("users",JSON.stringify(user))
+       $.ajaxSetup({
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    });
+    body=JSON.stringify(user1)
+    $.post('http://127.0.0.1:3000/users',body,function(xhr,status,responseText){
+        user1=JSON.parse(responseText)
+        $("#name").val(user1.name)
+        $("#username").val(user1.username)
+       $("address").val(user1.address)
+        $("mail").val(user1.mail)
+        $("heading").html(user1.name)
+
+    })
+
+                
         })
             }
         }

@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 app.use(express.json())
 const cors=require('cors')
+//const { profile } = require('console')
 app.use(cors())
 
 app.get('/contact', function (req, res) {
@@ -62,15 +63,25 @@ console.log(req.body)
     // obj1=JSON.parse(data1)
     const fs=require("fs")
     const data=JSON.parse(fs.readFileSync("users.json","utf-8"))
-    data.push(data1)
-    fs.writeFileSync("users.json",JSON.stringify(data),"utf-8")
-  
-    // res.send('Hello World api')
-  })
-  app.post('/users1',function(req,res){
-    var data1=req.body
-    const fs=require("fs")
-    fs.writeFileSync("users.json",JSON.stringify(data1),"utf-8")
+    let data2=[];
+    for(profile of data){
+      if(profile.mail===data1.mail){
+        continue;
+      }
+      data2.push(profile)
+    }
 
+
+    data2.push(data1)
+    fs.writeFileSync("users.json",JSON.stringify(data2),"utf-8")
+    res.send(data1)
+     //res.send('Hello World api')
   })
+  // app.post('/users1',function(req,res){
+  //   var data1=req.body
+  //   const fs=require("fs")
+  //   fs.writeFileSync("users.json",JSON.stringify(data1),"utf-8")
+
+  // })
+
 app.listen(3000)
